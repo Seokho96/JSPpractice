@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>고객 목록(MVC Model2)</h1>
+
+<form action="muldel.jsp" method="post">
+
+<table style="width: 700" id="tab">
+<col width="100"><col width="300"><col width="300">
+<tr>
+	<td height="2" bgcolor="#0000ff" colspan="3"></td>
+</tr>
+<tr>
+	<th bgcolor="#ffff00">
+		<input type="checkbox" name="alldel" onclick="deletechecks(this.checked)">
+	</th>
+	<th>ID</th>
+	<th>Name</th>
+</tr>
+<tr class="titleAf">
+	<td height="2" bgcolor="#0000ff" colspan="3"></td>
+</tr>
+
+<!-- 여기에 추가 된다 -->
+
+<tr>
+	<td align="center" height="1" bgcolor="#c0c0c0" colspan="3">		
+		<input type="submit" value="고객정보 삭제">
+	</td>
+</tr>
+<tr>
+	<td height="2" bgcolor="#0000ff" colspan="3"></td>
+</tr>
+
+<tr bgcolor="#f6f6f6">
+	<td colspan="3">
+		<a href="adduser?work=addView">고객정보 추가</a>
+	</td>
+</tr>
+
+
+</table>
+
+</form>
+
+<script type="text/javascript">
+//$(document).ready(function () {
+$(function () {
+	$.ajax({
+		url:"custData",
+		type:"get",
+		datatype:'json',
+		data:"work=data",
+		success:function(datas){
+			
+			let custlist = datas.map.custlist;
+			
+			$.each(custlist, function (i, val) {			
+			
+				let app = "<tr bgcolor='#f6f6f6'>" 
+						+	"<td align='center' bgcolor='yellow'>" 
+						+		"<input type='checkbox' name='delck' value='" + val.id + "'>"
+						+	"</td>"		
+						+	"<td>" + val.id + "</td>"
+						+	"<td>"
+						+		"<a href='custcontroller?work=detail&id=" + val.id + "'>" + val.name + "</a>"
+						+	"</td>"
+						+ "</tr>"
+						+ "<tr>"
+						+ 	"<td height='2' bgcolor='#0000ff' colspan='3'></td>"
+						+ "</tr>";
+				
+				$(".titleAf").eq(-1).after(app);	// class titleAf 뒤에 추가
+			});				
+			
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+	
+});
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+

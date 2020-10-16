@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<p id="demo"></p>
+
+<br>
+<input type="text" id="id">
+<button type="button">click</button>
+
+<script type="text/javascript">
+
+$(function () {
+
+	$('button').click(function() {
+
+		$.ajax({
+			url: "./hello",
+			type: "post",
+			datatype:"json",
+			// data: "id=abc&pwd=123",
+		    data: { id:$('#id').val(), pwd:"123"},
+			success: function(json) {
+			// alert("success");
+			// alert(json);
+			   
+			// alert(json[0].id);
+			// alert(json[0].name);
+			// alert(json[0].address);
+			   
+			$.each(json, function(i, val) {
+				     
+				$('#demo').append("i:" + i + " id: " + val.id 
+						           + " name: " + val.name 
+						           + " address: " + val.address + "<br>");
+			});
+			      
+			},
+			error: function () {
+				alert("error");
+			}
+		});
+		
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<p id="demo"></p>
+<br>
+<button type="button">click</button>
+
+<script type="text/javascript">
+
+$(function () {
+	
+	$("button").click(function() {
+		
+		// String -> json   : JSON.parse
+		// json ->  String  : JSON.stringify
+		
+		$.ajax({
+			url: "data.json",
+			type: "get",
+			datatype:"json",
+			success: function( json ) {
+			//	alert("success");
+			//	alert( json );
+			//  let str = JSON.stringify(json);
+			//  alert(str);
+			//   alert(json[0].name + " " + json[0].age + " " + json[0].address);
+			/*
+			    for (var i = 0; i < json.length; i++) {
+					$('#demo').append(json[i].name + " ");
+					$('#demo').append(json[i].age + " ");
+					$('#demo').append(json[i].address + " ");
+					$('#demo').append(json[i].phone + '<br>');
+				}
+			*/
+			
+			   $.each(json, function(index, item) {  //index == i , item  변수이므로 암거나 써두 상관x
+				   $('#demo').append(index + " ");
+				   $('#demo').append(item.name + " ");
+				   $('#demo').append(item.age + " ");
+				   $('#demo').append(item.address + " ");
+				   $('#demo').append(item.phone + "<br>");
+			   });
+			}, 
+			error: function () {
+				alert("error");
+			}
+		});
+		
+	});
+});
+
+
+</script>
+</body>
+</html>

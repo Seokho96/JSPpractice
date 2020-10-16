@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<p id="demo"></p>
+<br>
+<button type="button">click</button>
+
+<script type="text/javascript">
+
+$(function () {
+	$('button').click(function () {
+		url: "data.jsp",
+	    type: "get",
+	    datatype: "json",
+	    success: function( obj ){
+		//	alert('success');
+			alert(obj);
+			
+			let json = JSON.parse( obj );
+			
+			alert(json);
+			alert(json.num);
+			alert(json.name);
+			
+		},
+		error: function () {
+		    	
+		}
+	});
+});
+
+</script>
+
+</body>
+</html>

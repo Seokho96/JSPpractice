@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<p id="demo"></p>
+<br>
+<button type="button">click</button>
+
+<script type="text/javascript">
+$(function () {
+	
+	$('button').on('click', function() {
+		    $.ajax({
+		    	///////////////////////////////////////    send
+		    	url: "data.jsp",
+		    	type: "get",        // servlet -> doGet   (어느위치로 갈거냐~)
+		    // 	data: "t1=XYZ&t2=카타파",
+		     	data: {t1:"XYZ", t2:"카타파"},
+		       /////////////////////////////////////////
+		       
+		       ///---------------------------------------///  recv
+		        success: function (data, status, xhr){
+		        //	alert("success");
+		           $('#demo').html(data);
+		           alert(status);
+		           alert(xhr);
+		        },
+		        error: function (xhr, status, error) {   //에러는 ()만 넣어줘도 된다
+		        	alert("에러");
+				},
+				complete: function (xhr, satatus) {   //생략가능
+				//	alert("통신종료");
+				}
+		    	///---------------------------------------///
+		    });
+	})
+});
+</script>
+
+</body>
+</html>
